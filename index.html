@@ -1,1 +1,227 @@
-hallo, das ist nur ein test
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kochrevier</title>
+<meta name="description" content="Kochrevier. Bald.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  :root{
+    --bg:    #0a0a0a;
+    --fg:    #f2f0ec;
+    --muted: rgba(242, 240, 236, 0.42);
+    --line:  rgba(242, 240, 236, 0.14);
+  }
+
+  html, body{
+    height: 100%;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+
+  .page{
+    height: 100vh;
+    height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 32px 40px;
+  }
+
+  /* ===== Top ===== */
+  header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  header .right{ text-align: right; }
+
+  /* ===== Center ===== */
+  main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 56px;
+  }
+
+  h1{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(64px, 14vw, 180px);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--fg);
+    opacity: 0;
+    animation: fade 1.6s ease-out 0.2s forwards;
+  }
+
+  .tagline{
+    font-size: 13px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0;
+    animation: fade 1.6s ease-out 0.8s forwards;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ===== Form ===== */
+  .form-block{
+    width: 100%;
+    max-width: 380px;
+    opacity: 0;
+    animation: fade 1.6s ease-out 1.4s forwards;
+  }
+
+  form{
+    position: relative;
+    border-bottom: 1px solid var(--line);
+    transition: border-color 0.4s ease;
+  }
+  form:focus-within{ border-color: var(--fg); }
+
+  input{
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--fg);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    padding: 14px 60px 14px 2px;
+  }
+  input::placeholder{
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  button{
+    position: absolute;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+  }
+  button:hover{ color: var(--fg); }
+
+  .note{
+    margin-top: 16px;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    min-height: 14px;
+    transition: color 0.4s ease;
+  }
+  .note.ok{ color: var(--fg); }
+
+  /* ===== Bottom ===== */
+  footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  @keyframes fade{
+    to{ opacity: 1; }
+  }
+
+  /* ===== Mobile ===== */
+  @media (max-width: 640px){
+    .page{ padding: 24px 22px; }
+    header, footer{
+      font-size: 10px;
+      letter-spacing: 0.24em;
+    }
+    main{ gap: 40px; }
+    h1{ font-size: clamp(56px, 18vw, 96px); }
+    .tagline{ font-size: 11px; letter-spacing: 0.32em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <div>Kochrevier</div>
+    <div class="right">MMXXVI</div>
+  </header>
+
+  <main>
+    <h1>Kochrevier</h1>
+    <div class="tagline">Coming soon &middot; Paderborn</div>
+
+    <div class="form-block">
+      <form id="signup" novalidate>
+        <input
+          type="email"
+          id="email"
+          placeholder="E-Mail-Adresse"
+          aria-label="E-Mail-Adresse"
+          required>
+        <button type="submit">Eintragen</button>
+      </form>
+      <p class="note" id="note">&nbsp;</p>
+    </div>
+  </main>
+
+  <footer>
+    <div>&copy; Kochrevier</div>
+    <div>Paderborn</div>
+  </footer>
+
+</div>
+
+<script>
+  const form = document.getElementById('signup');
+  const note = document.getElementById('note');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    if(!email || !email.includes('@')) {
+      note.textContent = 'Bitte gib eine gültige Adresse ein';
+      note.classList.remove('ok');
+      return;
+    }
+    note.textContent = 'Vielen Dank — wir melden uns';
+    note.classList.add('ok');
+    form.querySelector('input').value = '';
+  });
+</script>
+
+</body>
+</html>
